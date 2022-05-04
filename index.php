@@ -23,7 +23,7 @@ include_once "./server/server.php"; ?>
                 </div>
                 <span id="success-msg" class="aling-items-center"></span>
                 <div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regUser">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewUser">
                         Cadastrar
                     </button>
                 </div>
@@ -43,7 +43,7 @@ include_once "./server/server.php"; ?>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="regUser">Modal title</h5>
+                    <h5 class="modal-title" id="regUser">Cadastro</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -64,6 +64,31 @@ include_once "./server/server.php"; ?>
                     </form>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="viewUser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewUser">Detalhes do usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table id="show-user" class="table table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                        </tr>
+                        <tr>
+                            <td id="id-user"></td>
+                            <td id="name-user"></td>
+                            <td id="email-user"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

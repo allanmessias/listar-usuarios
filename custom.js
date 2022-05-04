@@ -44,4 +44,19 @@ form.addEventListener("submit", async(e) => {
     }
 });
 
+async function viewUser(id) {
+    const dados = await fetch("view.php?id=" + id);
+    const response = await dados.json();
+
+    if (response["erro"]) {
+        errorMsg.innerHTML = response["msg"];
+    } else {
+        const viewModel = new bootstrap.Modal(document.getElementById("viewUser"));
+        viewModel.show();
+
+        document.getElementById("id-user").innerHTML = response["data"].id;
+        document.getElementById("name-user").innerHTML = response["data"].nome;
+        document.getElementById("email-user").innerHTML = response["data"].email;
+    }
+}
 list_user(1);
