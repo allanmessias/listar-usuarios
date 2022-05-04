@@ -1,10 +1,15 @@
-const tbody = document.querySelector("tbody");
+/**
+ * Retuns data response to tbody innerHMTL
+ * @param {number} page number of page
+ * @return {string} data to user's interface
+ */
 
-const list_user = async() => {
-    const data = await fetch("./list.php");
+const tbody = document.querySelector(".listar-usuario");
+
+const list_user = async(page) => {
+    const data = await fetch("./list.php?pagina=" + page);
     const dataResponse = await data.text();
     tbody.innerHTML = dataResponse;
-    return dataResponse;
 };
 
-list_user();
+list_user(1);
