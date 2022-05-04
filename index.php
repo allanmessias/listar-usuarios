@@ -16,10 +16,19 @@ include_once "./server/server.php"; ?>
 
 <body>
     <div class=container>
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <h4>Listar Usuários</h4>
+        <div class="row mt-4 mb-3">
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <div>
+                    <h4>Listar Usuários</h4>
+                </div>
+                <span id="success-msg" class="aling-items-center"></span>
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regUser">
+                        Cadastrar
+                    </button>
+                </div>
             </div>
+
         </div>
         <span class="listar-usuario">
 
@@ -27,6 +36,35 @@ include_once "./server/server.php"; ?>
 
         <div class="pagination">
 
+        </div>
+    </div>
+
+    <div class="modal fade" id="regUser" tabindex="-1" aria-labelledby="regUser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="regUser">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="regForm" method='POST'>
+                        <span id="error-msg"></span>
+                        <div class="mb-3">
+                            <label for="nome" class="col-form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu melhor e-mail">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
 
