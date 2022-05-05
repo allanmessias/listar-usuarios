@@ -23,7 +23,7 @@ include_once "./server/server.php"; ?>
                 </div>
                 <span id="success-msg" class="aling-items-center"></span>
                 <div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewUser">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regUser">
                         Cadastrar
                     </button>
                 </div>
@@ -89,6 +89,37 @@ include_once "./server/server.php"; ?>
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUser">Edição de Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method='POST'>
+                        <span id="error-msg-edit"></span>
+                        <input type="hidden" name="id" id="edit-id">
+
+                        <div class="mb-3">
+                            <label for="nome" class="col-form-label">Nome:</label>
+                            <input type="text" class="form-control" id="edit-nome" name="nome" placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="edit-email" name="email" placeholder="Digite seu melhor e-mail">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <input type="submit" class="btn btn-primary" value="Editar">
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
