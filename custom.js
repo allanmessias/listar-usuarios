@@ -1,9 +1,3 @@
-/**
- * Retuns data response to tbody innerHMTL
- * @param {number} page number of page
- * @return {string} data to user's interface
- */
-
 const tbody = document.querySelector(".listar-usuario");
 const form = document.getElementById("regForm");
 const errorMsg = document.getElementById("error-msg");
@@ -12,6 +6,11 @@ const regModal = new bootstrap.Modal(document.getElementById("regUser"));
 const name = document.getElementById("nome").value;
 const email = document.getElementById("email").value;
 
+/**
+ * Retuns data response to tbody innerHMTL
+ * @param {number} page number of page
+ * @return {string} data to user's interface
+ */
 const list_user = async(page) => {
     const data = await fetch("./list.php?pagina=" + page);
     const dataResponse = await data.text();
@@ -44,4 +43,25 @@ form.addEventListener("submit", async(e) => {
     }
 });
 
+/**
+ * Fetchs user's id and returns to modal action
+ * @param {number} id fetch id user on view.php
+ * @return {string} data to user's modal action
+ */
+
+async function viewUser(id) {
+    const dados = await fetch("view.php?id=" + id);
+    const response = await dados.json();
+
+    if (response["erro"]) {
+        errorMsg.innerHTML = response["msg"];
+    } else {
+        const viewModel = new bootstrap.Modal(document.getElementById("viewUser"));
+        viewModel.show();
+
+        document.getElementById("id-user").innerHTML = response["data"].id;
+        document.getElementById("name-user").innerHTML = response["data"].nome;
+        document.getElementById("email-user").innerHTML = response["data"].email;
+    }
+}
 list_user(1);
