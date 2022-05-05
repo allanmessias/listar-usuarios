@@ -1,8 +1,12 @@
+// Global variables
 const tbody = document.querySelector(".listar-usuario");
 const form = document.getElementById("regForm");
+const editForm = document.getElementById("editForm");
 const errorMsg = document.getElementById("error-msg");
+const errorMsgEdit = document.getElementById("error-msg-edit");
 const successMsg = document.getElementById("success-msg");
 const regModal = new bootstrap.Modal(document.getElementById("regUser"));
+const editModal = new bootstrap.Modal(document.getElementById("editUser"));
 const name = document.getElementById("nome").value;
 const email = document.getElementById("email").value;
 
@@ -11,7 +15,7 @@ const email = document.getElementById("email").value;
  * @param {number} page number of page
  * @return {string} data to user's interface
  */
-const list_user = async(page) => {
+const listUser = async(page) => {
     const data = await fetch("./list.php?pagina=" + page);
     const dataResponse = await data.text();
     tbody.innerHTML = dataResponse;
@@ -21,7 +25,7 @@ form.addEventListener("submit", async(e) => {
     e.preventDefault();
 
     if (name === "" || email === "") {
-        errorMsg.innerHTML = "Necessário preencher o nome";
+        errorMsg.innerHTML = "Necessário preencher todos os dados";
     } else {
         const dataForm = new FormData(form);
         dataForm.append("add", 1);
@@ -56,6 +60,7 @@ async function viewUser(id) {
     if (response["erro"]) {
         errorMsg.innerHTML = response["msg"];
     } else {
+        successMsg.innerHTML = response["msg"];
         const viewModel = new bootstrap.Modal(document.getElementById("viewUser"));
         viewModel.show();
 
@@ -64,4 +69,45 @@ async function viewUser(id) {
         document.getElementById("email-user").innerHTML = response["data"].email;
     }
 }
-list_user(1);
+
+/**
+ * Fetchs user's id and returns to modal action
+ * @param {number} id fetch id user on view.php
+ * @return {string} data to user's modal action
+ */
+
+async function editUser(id) {
+    const editData = await fetch("view.php?id=" + id);
+    const response = await editData.json();
+
+    if (response["erro"]) return;
+
+    editModal.show();
+    document.getElementById("edit-id").value = response["data"].id;
+    document.getElementById("edit-nome").value = response["data"].nome;
+    document.getElementById("edit-email").value = response["data"].email;
+
+    // On submit, fetchs user's on edit.php and returns it to modal window
+    editForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+        const dataFormEdit = new FormData(editForm);
+
+        const responseEdit = await fetch("edit.php", {
+            method: "POST",
+            body: dataFormEdit,
+        });
+
+        const responseEditJson = await responseEdit.json();
+
+        // If there's an error, throws to user's modal, indicating that's something's wrong
+        if (responseEditJson["erro"]) {
+            errorMsgEdit.innerHTML = responseEditJson["msg"];
+        } else {
+            successMsg.innerHTML = responseEditJson["msg"];
+
+            editModal.hide();
+            listUser(1);
+        }
+    });
+}
+listUser(1);
