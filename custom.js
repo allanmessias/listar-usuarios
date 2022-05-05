@@ -1,9 +1,3 @@
-/**
- * Retuns data response to tbody innerHMTL
- * @param {number} page number of page
- * @return {string} data to user's interface
- */
-
 const tbody = document.querySelector(".listar-usuario");
 const form = document.getElementById("regForm");
 const errorMsg = document.getElementById("error-msg");
@@ -12,6 +6,11 @@ const regModal = new bootstrap.Modal(document.getElementById("regUser"));
 const name = document.getElementById("nome").value;
 const email = document.getElementById("email").value;
 
+/**
+ * Retuns data response to tbody innerHMTL
+ * @param {number} page number of page
+ * @return {string} data to user's interface
+ */
 const list_user = async(page) => {
     const data = await fetch("./list.php?pagina=" + page);
     const dataResponse = await data.text();
@@ -43,6 +42,12 @@ form.addEventListener("submit", async(e) => {
         }
     }
 });
+
+/**
+ * Fetchs user's id and returns to modal action
+ * @param {number} id fetch id user on view.php
+ * @return {string} data to user's modal action
+ */
 
 async function viewUser(id) {
     const dados = await fetch("view.php?id=" + id);
