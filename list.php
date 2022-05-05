@@ -19,7 +19,7 @@ if (!empty($page)) {
   $dados = "<table class='table table-dark'>
     <tbody class='listar-usuario'>
         <thead>
-            <tr>
+            <tr class='text-center'>
                 <th>ID</th>
                 <th>NOME</th>
                 <th>EMAIL</th>
@@ -33,10 +33,14 @@ if (!empty($page)) {
     <td>$nome</td>
     <td>$email</td>
     <td>
-        <button id='$id' class='btn btn-outline-primary btn-sm' 
-        onclick='viewUser($id)'>Visualizar Usuario</button>
-        <button id='$id' class='btn btn-outline-warning btn-sm' 
+      <div class='d-flex justify-content-around'>
+        <button id='$id' class='btn btn-outline-primary btn-sm px-3 mx-1' 
+        onclick='viewUser($id)'>Visualizar</button>
+        <button id='$id' class='btn btn-outline-warning btn-sm px-3 mx-1' 
         onclick='editUser($id)'>Editar</button>
+        <button id='$id' class='btn btn-outline-danger btn-sm px-3 mx-1' 
+        onclick='deleteUser($id)'>Apagar</button>
+        </div>
     </td>
     </tr>";
   }
@@ -58,12 +62,12 @@ if (!empty($page)) {
     '<nav aria-label="Page navigation example"<ul class="pagination justify-content-center">';
 
   $dados .=
-    "<li class='page-item'><a href='#' class='page-link' onclick='list_user(1)'>Primeira pagina</a></li>";
+    "<li class='page-item'><a href='#' class='page-link' onclick='listUser(1)'>Primeira pagina</a></li>";
 
   //Prints previous pages on pagination
   for ($prev_page = $page - $max_links; $prev_page <= $page - 1; $prev_page++) {
     if ($prev_page >= 1) {
-      $dados .= "<li class='page-item'><a class='page-link' onclick='list_user($prev_page)' href='#'>$prev_page</a></li>";
+      $dados .= "<li class='page-item'><a class='page-link' onclick='listUser($prev_page)' href='#'>$prev_page</a></li>";
     }
   }
 
@@ -76,11 +80,11 @@ if (!empty($page)) {
     $page_after++
   ) {
     if ($page_after <= $pg_qt) {
-      $dados .= "<li class='page-item'><a class='page-link' href='#' onclick='list_user($page_after)'>$page_after</a></li>";
+      $dados .= "<li class='page-item'><a class='page-link' href='#' onclick='listUser($page_after)'>$page_after</a></li>";
     }
   }
 
-  $dados .= "<li class='page-item'><a class='page-link' href='#' onclick='list_user($pg_qt)'>Ultima</a></li>";
+  $dados .= "<li class='page-item'><a class='page-link' href='#' onclick='listUser($pg_qt)'>Ultima</a></li>";
   $dados .= "</ul></nav>";
 } else {
   echo "<p>alert: nada retornado</p>";
