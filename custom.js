@@ -7,8 +7,8 @@ const errorMsgEdit = document.getElementById("error-msg-edit");
 const successMsg = document.getElementById("success-msg");
 const regModal = new bootstrap.Modal(document.getElementById("regUser"));
 const editModal = new bootstrap.Modal(document.getElementById("editUser"));
-const name = document.getElementById("nome").value;
-const email = document.getElementById("email").value;
+const nameUser = document.getElementById("nome");
+const emailUser = document.getElementById("email");
 const delUserMsg = document.getElementById("del-user");
 
 /**
@@ -25,8 +25,9 @@ const listUser = async(page) => {
 form.addEventListener("submit", async(e) => {
     e.preventDefault();
 
-    if (name === "" || email === "") {
+    if (!nameUser.value || !emailUser.value) {
         errorMsg.innerHTML = "Necessário preencher todos os dados";
+        console.log(emailUser, nameUser);
     } else {
         const dataForm = new FormData(form);
         dataForm.append("add", 1);
@@ -43,7 +44,7 @@ form.addEventListener("submit", async(e) => {
             successMsg.innerHTML = responseJson["msg"];
             form.reset();
             regModal.hide();
-            list_user(1);
+            listUser(1);
         }
     }
 });
