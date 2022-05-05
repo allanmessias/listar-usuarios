@@ -1,3 +1,10 @@
 # Lista de Usuários
 
-Projeto de CRUD básico para estudo na linguagem PHP, usando XAMPP e portanto, MariaDB como banco de dados :)
+### Para aprender uma linguagem nova, melhor um projeto, né? :)
+
+## O que foi realizado? 
+Para este projeto realizei um CRUD, com um banco de dados fornecido pelo tutorial do professor Cesar, da CELKE.
+
+<p align="center">
+    <img width="800" height="600" src="src/assets/to_readme/projeto-agenda.gif">
+</p>
