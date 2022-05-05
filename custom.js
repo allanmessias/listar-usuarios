@@ -9,6 +9,7 @@ const regModal = new bootstrap.Modal(document.getElementById("regUser"));
 const editModal = new bootstrap.Modal(document.getElementById("editUser"));
 const name = document.getElementById("nome").value;
 const email = document.getElementById("email").value;
+const delUserMsg = document.getElementById("del-user");
 
 /**
  * Retuns data response to tbody innerHMTL
@@ -60,7 +61,6 @@ async function viewUser(id) {
     if (response["erro"]) {
         errorMsg.innerHTML = response["msg"];
     } else {
-        successMsg.innerHTML = response["msg"];
         const viewModel = new bootstrap.Modal(document.getElementById("viewUser"));
         viewModel.show();
 
@@ -109,5 +109,16 @@ async function editUser(id) {
             listUser(1);
         }
     });
+}
+
+async function deleteUser(id) {
+    const delUser = await fetch("delete.php?id=" + id);
+    const responseDelData = await delUser.json();
+
+    if (responseDelData["erro"]) return;
+
+    successMsg.innerHTML = responseDelData["msg"];
+    console.log(successMsg);
+    listUser(1);
 }
 listUser(1);
